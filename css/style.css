@@ -1,0 +1,105 @@
+html{
+	background-color: #dbe7f3;
+}
+
+body{
+	margin: 0;
+}
+
+#header{
+	margin-top: 2%;
+	background-color: #b7c6d6;
+	width: 800px;
+	height: 30px;
+}
+
+#wrapper{
+	margin-left: auto;
+	margin-right: auto;
+	width: 800px;
+}
+
+#content{
+	margin-top: 2%;
+	background-color: #b7c6d6;
+	width: 800px;
+	height: 800px;
+}
+
+#footer{
+	margin-top: 2%;
+	margin-bottom: 50px;
+	background-color: #b7c6d6;
+	height: 150px;
+	width: 800px;
+}
+
+ul li{
+	display: inline;
+}
+
+ul{
+	padding: 2px;
+}
+
+li{
+	padding-left: 10px;
+}
+
+a.navlinks{
+	font-family: Calibri, Candara, Segoe, 'Segoe UI', Optima, Arial, sans-serif;
+	font-size: 16px;
+	font-style: normal;
+	font-variant: normal;
+	font-weight: bold;
+	line-height: 26.3999996185303px;
+	text-decoration: none;
+	color: black;
+	text-align: left;
+}
+
+a.navlinks:hover{
+	text-decoration: none;
+	color: #dbe7f3;
+}
+
+a.aboutlink{
+	font-family: Calibri, Candara, Segoe, 'Segoe UI', Optima, Arial, sans-serif;
+	font-size: 16px;
+	font-style: normal;
+	font-variant: normal;
+	font-weight: bold;
+	line-height: 26.3999996185303px;
+	text-decoration: none;
+	color: black;
+	float: right;
+	padding-right: 5px;
+}
+
+a.aboutlink:hover{
+	text-decoration: none;
+	color: #dbe7f3;
+}
+
+p.top{
+	display: inline;
+	color: red;
+	font-family: Calibri, Candara, Segoe, 'Segoe UI', Optima, Arial, sans-serif;
+	font-size: 14px;
+	font-style: normal;
+	font-variant: normal;
+	font-weight: 500;
+	line-height: 26.3999996185303px;
+
+}
+p{
+	padding-left: 15px;
+	color: black;
+	font-family: Calibri, Candara, Segoe, 'Segoe UI', Optima, Arial, sans-serif;
+	font-size: 14px;
+	font-style: normal;
+	font-variant: normal;
+	font-weight: 500;
+	line-height: 26.3999996185303px;
+
+}
