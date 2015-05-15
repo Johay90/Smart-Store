@@ -21,7 +21,11 @@
 			</div>
 
 			<div id="content-loginform">
-			<p>sample text</p> 
+				<div id="innnerloginform">
+					<label class="login">Username: <input type="text" name="firstname"><br /></label>
+					<label class="login">Password: <input type="text" name="firstname"><br /></label>
+					<p style="text-align: center;"><input type="submit" class="login" value="Submit"></p>
+				</div>
 
 			</div>
 
