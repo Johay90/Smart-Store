@@ -21,13 +21,24 @@
 			</div>
 
 			<div id="content-loginform">
-				<div id="innnerloginform">
-					<label class="login">Username: <input type="text" name="firstname"><br /></label>
-					<label class="login">Password: <input type="text" name="firstname"><br /></label>
-					<p style="text-align: center;"><input type="submit" class="login" value="Submit"></p>
-				</div>
+				<b>Already have an account?</b><br />
+					<input type="text" name="username" placeholder="Type your username">
+					<input type="text" name="password" placeholder="Type your password">
+					<input type="submit" class="login" value="Submit">
 
 			</div>
+
+			<div id="content-registerform">
+				<b>Already have an account?</b><br />
+					<input type="text" name="username" placeholder="First Name">
+					<input type="text" name="username" placeholder="Second Name">
+					<input type="text" name="username" placeholder="Username">
+					<input type="text" name="password" placeholder="Password">
+					<input type="text" name="password" placeholder="E-Mail">
+					<input type="text" name="password" placeholder="Verify E-Mail">
+					<p style="text-align: center;"><input type="submit" class="login" value="Submit"></p>
+
+			</div><div style="clear:both"></div>
 
 			<div id="footer">
 				<div id="footer-content-logo">

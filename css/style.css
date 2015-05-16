@@ -27,33 +27,31 @@ body{
 }
 
 #content-loginform{
+	float: left;
 	margin-top: 2%;
 	background-color: #b7c6d6;
-	width: 800px;
-	height: 200px;
+	width: 420px;
+	height: 55px;
+	padding-left: 5px;
 }
 
-#innnerloginform{
-	position: relative;
-  	top: 50%;
-  	transform: translateY(-50%);
-	margin-left: auto;
-	margin-right: auto;
-	padding-left: 10px;
-	padding-top: 5px;
-	background-color: #A8B3BF;
-	width: 250px;
-	height: 100px;
-	border: 1px solid black;
+#content-registerform{
+	float: right;
+	margin-top: 2%;
+	background-color: #b7c6d6;
+	width: 360px;
+	height: 140px;
+	padding-left: 5px;
 }
 
-label.login{
+b{
+	padding-left: 5px;
 	color: black;
 	font-family: Calibri, Candara, Segoe, 'Segoe UI', Optima, Arial, sans-serif;
 	font-size: 14px;
 	font-style: normal;
 	font-variant: normal;
-	font-weight: 500;
+	font-weight: bold;
 	line-height: 26.3999996185303px;
 }
 
