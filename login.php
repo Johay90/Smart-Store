@@ -1,3 +1,50 @@
+<?php
+error_reporting(E_ERROR);
+
+	if (isset($_POST['regbtn'])){
+		// register form handling
+		$fname = $_POST['fstname'];
+		$lname = $_POST['lstname'];
+		$usrname = $_POST['usrname'];
+		$psword = $_POST['psword'];
+		$psword2 = $_POST['vfypsword'];
+		$email = $_POST['email'];
+		include("db/config.php");
+		$conn = dbh();
+
+			if (!empty($fname) && !empty($lname) && !empty($usrname) && !empty($psword) && !empty($psword2) && !empty($email) && $psword == $psword2 && filter_var($email, FILTER_VALIDATE_EMAIL)){
+
+					$rOutput = "Thank for submitting your information.";
+					// Info is correct, password hashing now
+					$options = [
+					];
+					$hashed_password = password_hash($psword, PASSWORD_DEFAULT, $options);
+					// add data to db
+					$stmt = $conn->prepare("INSERT INTO users (firstname, lastname, username, password, email) VALUES (:fname, :lname, :usrname, :hashed_password, :email)");
+					$stmt->bindParam(':fname', $fname);
+				    $stmt->bindParam(':lname', $lname);
+					$stmt->bindParam(':usrname', $usrname);
+					$stmt->bindParam(':hashed_password', $hashed_password);
+					$stmt->bindParam(':email', $email);
+					$stmt->execute();
+
+			}elseif ($psword != $psword2){
+
+				$rOutput = "Passwords do not match!";
+
+				// check email, username, dont exist
+
+			}else{
+
+				$rOutput = "Please fill out all the fields correctly.";
+			}
+
+	}
+
+
+
+?>
+
 <html>
 	<body>
 		<head>
@@ -29,13 +76,16 @@
 			</div>
 
 			<div id="content-registerform">
-				<b>Already have an account?</b><br />
+				<?php 	
+					if (!empty($rOutput)) { echo "<center><b>" . $rOutput . "</b></center>"; }
+					else {echo "<b>Don't have an acocunt? Sign up!</b><br />";} 
+				?>
 					<form name="regform" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
 						<input type="text" name="fstname"  placeholder="First Name">
 						<input type="text" name="lstname"  placeholder="Surname">
 						<input type="text" name="usrname"  placeholder="Username">
-						<input type="text" name="psword"   placeholder="Password">
-						<input type="text" name="vfypsword" placeholder="Verify Password">
+						<input type="password" name="psword"   placeholder="Password">
+						<input type="password" name="vfypsword" placeholder="Verify Password">
 						<input type="text" name="email"    placeholder="E-Mail">
 						<p style="text-align: center;">
 						<input name="regbtn" type="submit" class="login" value="Submit"></p>
@@ -70,26 +120,3 @@
 
 	</body>
 </html>
-
-<?php
-error_reporting(E_ERROR);
-	if (isset($_POST['regbtn'])){
-		// register form handling
-		$fname = $_POST['fstname'];
-		$lname = $_POST['lstname'];
-		$usrname = $_POST['usrname'];
-		$psword = $_POST['psword'];
-		$psword2 = $_POST['vfypsword'];
-		$email = $_POST['email'];
-
-			if (!empty($fname) && !empty($lname) && !empty($usrname) && !empty($psword) && !empty($psword2) && !empty($email)){
-				echo "Thank for submitting your information." . $fname;
-			}else{
-				echo "Please fill out all the fields.";
-			}
-
-	}
-
-
-
-?>
