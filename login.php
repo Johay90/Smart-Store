@@ -64,6 +64,41 @@ if (isset($_POST['regbtn'])){
 
 }
 
+// -- LOGIN -- 
+
+if (isset($_POST['loginsubmit'])){
+	include("db/config.php");
+	$conn = dbh();
+	$username = $_POST['username'];
+	$password = $_POST['password'];
+
+	// username checks
+	$sth = $conn->prepare("SELECT username FROM users WHERE username = :username");
+	$sth->bindParam(':username', $username);
+	$sth->execute();
+	$result = $sth->fetch(PDO::FETCH_ASSOC);
+	$verifyuser = $result['username'];
+
+	if ($verifyuser == $username){
+
+		// Getting hashed password
+		$sth = $conn->prepare("SELECT password FROM users WHERE username = :username");
+		$sth->bindParam(':username', $username);
+		$sth->execute();
+		$result = $sth->fetch(PDO::FETCH_ASSOC);
+		$hashed_password = $result['password'];
+		$verify_password = password_verify($password, $hashed_password);
+
+		if ($verify_password === TRUE){
+			$lOutput = "You are logged in."; // remove this. Add session code + header 
+		}
+
+	}else{
+		$lOutput = "Details were not correct";
+	}
+	
+}
+
 ?>
 
 <html>
@@ -89,10 +124,15 @@ if (isset($_POST['regbtn'])){
 		</div>
 
 		<div id="content-loginform">
-			<b>Already have an account?</b><br />
+		<form name="loginform" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
+			<?php 	
+			if (!empty($lOutput)) { echo "<center><b>" . $lOutput . "</b></center>"; }
+			else { echo "<b>Have an account already?</b><br />";} 
+			?>
 			<input type="text" name="username" placeholder="Type your username">
-			<input type="text" name="password" placeholder="Type your password">
+			<input type="password" name="password" placeholder="Type your password">
 			<input type="submit" name="loginsubmit" class="login" value="Submit">
+		</form>
 
 		</div>
 
