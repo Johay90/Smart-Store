@@ -102,7 +102,7 @@ if (isset($_POST['loginsubmit'])){
 		// Logging them in (adding session etc);
 		$_SESSION['id'] = $id;
 		$_SESSION['user'] = $username;
-		header("Location: member.php");
+		header("Location: settingsr.php");
 
 		// Lets create an address record. TODO: Can I not do this via linking the 2 tables up?
 		// TODO: Do I also really need to do this in "login" section?
