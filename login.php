@@ -17,13 +17,13 @@ if (isset($_POST['regbtn'])){
 	$sth = $conn->prepare("SELECT COUNT(*) FROM users WHERE email = :email");
 	$sth->bindParam(':email', $email);
 	$sth->execute();
-	$email_rows = $sth->fetchColumn(); 
+	$email_rows = $sth->fetchColumn();
 
 	// database checks for username
 	$sth = $conn->prepare("SELECT COUNT(*) FROM users WHERE username = :usrname");
 	$sth->bindParam(':usrname', $usrname);
 	$sth->execute();
-	$username_rows = $sth->fetchColumn(); 
+	$username_rows = $sth->fetchColumn();
 
 	// start of conditional statements
 	if (!empty($fname) && !empty($lname) && !empty($usrname) && !empty($psword) && !empty($psword2) && !empty($email) && $psword == $psword2 && filter_var($email, FILTER_VALIDATE_EMAIL) && $email_rows == 0 && $username_rows == 0){
@@ -65,7 +65,7 @@ if (isset($_POST['regbtn'])){
 
 }
 
-// -- LOGIN -- 
+// -- LOGIN --
 
 if (isset($_POST['loginsubmit'])){
 	include("db/config.php");
@@ -107,7 +107,7 @@ if (isset($_POST['loginsubmit'])){
 	}else{
 		$lOutput = "Details were not correct";
 	}
-	
+
 }
 
 ?>
@@ -126,14 +126,14 @@ if (isset($_POST['loginsubmit'])){
 		?>
 
 		<div id="content-loginform">
-		<?php 
+		<?php
 		if (isset($_SESSION['id'])) {
 			 header("Location: member.php");
 		}?>
 		<form name="loginform" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
-			<?php 	
+			<?php
 			if (!empty($lOutput)) { echo "<center><b>" . $lOutput . "</b></center>"; }
-			else { echo "<b>Have an account already?</b><br />";} 
+			else { echo "<b>Have an account already?</b><br />";}
 			?>
 			<input type="text" name="username" placeholder="Type your username">
 			<input type="password" name="password" placeholder="Type your password">
@@ -143,9 +143,9 @@ if (isset($_POST['loginsubmit'])){
 		</div>
 
 		<div id="content-registerform">
-			<?php 	
+			<?php
 			if (!empty($rOutput)) { echo "<center><b>" . $rOutput . "</b></center>"; }
-			else {echo "<b>Don't have an account? Sign up!</b><br />";} 
+			else {echo "<b>Don't have an account? Sign up!</b><br />";}
 			?>
 			<form name="regform" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
 				<input type="text" name="fstname"  placeholder="First Name">
