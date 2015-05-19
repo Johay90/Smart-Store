@@ -17,7 +17,7 @@ check_login();
 			?>
 
 			<div id="content">
-			<p>Update this to a welcome page/logged in soon.</p>
+			<p>LEt the fun begin... (tomorrow)</p>
 
 			</div>
 
