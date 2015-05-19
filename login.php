@@ -1,5 +1,6 @@
 <?php
 error_reporting(E_ERROR);
+session_start();
 
 // -- REGISTER SECTION --
 if (isset($_POST['regbtn'])){
@@ -90,7 +91,17 @@ if (isset($_POST['loginsubmit'])){
 		$verify_password = password_verify($password, $hashed_password);
 
 		if ($verify_password === TRUE){
-			$lOutput = "You are logged in."; // remove this. Add session code + header 
+		// Get the ID for to store it into a session
+		$sth = $conn->prepare("SELECT id FROM users WHERE username = :username");
+		$sth->bindParam(':username', $username);
+		$sth->execute();
+		$result = $sth->fetch(PDO::FETCH_ASSOC);
+		$id = $result['id'];
+
+		// Logging them in (adding session etc);
+		$_SESSION['id'] = $id;
+		$_SESSION['user'] = $username;
+		header("Location: member.php");
 		}
 
 	}else{
@@ -110,20 +121,15 @@ if (isset($_POST['loginsubmit'])){
 
 	<div id="wrapper">
 
-		<div id="header">
-			<ul>
-				<li><a class="navlinks" href="#">Store</a></li>
-				<li><a class="navlinks" href="#">Account</a></li>
-				<li><a class="navlinks" href="#">Contact</a></li>
-				<li><a class="navlinks" href="#">Offers</a></li>
-				<li><a class="navlinks" href="login.php">Login</a></li>
-				<li><a class="aboutlink" href="index.php">About</a></li>
-				<p class="top">This website is not mobile friendly.</p>
-			</ul>
-
-		</div>
+		<?php
+			include_once 'nav.php';
+		?>
 
 		<div id="content-loginform">
+		<?php 
+		if (isset($_SESSION['id'])) {
+			 header("Location: member.php");
+		}?>
 		<form name="loginform" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
 			<?php 	
 			if (!empty($lOutput)) { echo "<center><b>" . $lOutput . "</b></center>"; }
@@ -139,7 +145,7 @@ if (isset($_POST['loginsubmit'])){
 		<div id="content-registerform">
 			<?php 	
 			if (!empty($rOutput)) { echo "<center><b>" . $rOutput . "</b></center>"; }
-			else {echo "<b>Don't have an acocunt? Sign up!</b><br />";} 
+			else {echo "<b>Don't have an account? Sign up!</b><br />";} 
 			?>
 			<form name="regform" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
 				<input type="text" name="fstname"  placeholder="First Name">
