@@ -46,6 +46,7 @@ if (isset($_POST['regbtn'])){
 		$stmt->bindParam(':email', $email);
 		$stmt->execute();
 
+
 	}elseif ($psword != $psword2){
 
 		$rOutput = "Passwords do not match!";
@@ -102,6 +103,20 @@ if (isset($_POST['loginsubmit'])){
 		$_SESSION['id'] = $id;
 		$_SESSION['user'] = $username;
 		header("Location: member.php");
+
+		// Lets create an address record. TODO: Can I not do this via linking the 2 tables up?
+		// TODO: Do I also really need to do this in "login" section?
+		$sth = $conn->prepare("SELECT COUNT(*) from address WHERE user_ID = :id");
+		$sth->bindParam(':id', $id);
+		$sth->execute();
+		$address = $sth->fetchColumn();
+
+				if ($address == 0){
+					$stmt = $conn->prepare("INSERT INTO address (user_ID) VALUES (:userid)");
+					$stmt->bindParam(':userid', $id);
+					$stmt->execute();
+				}
+
 		}
 
 	}else{
