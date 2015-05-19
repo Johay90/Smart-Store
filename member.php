@@ -24,7 +24,6 @@ check_login();
 			<?php
 			include_once 'footer.php';
 			?>
-
 		</div>
 
 	</body>
